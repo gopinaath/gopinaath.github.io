@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport"
+		content="width=device-width,
+						initial-scale=1.0" />
+	<title>QR Code Generator</title>
+	
+	<style>
+		h1, h3 {
+		color: green;
+		}
+		body, header {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		}
+	</style>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js">
+	</script>
+
+	<script>
+		console.log("1");
+		function regenQrCode(){
+			clearDiv("qrcode");
+			clearDiv("qr-target");
+
+			console.log("inside regenQrCode()");
+			
+			link = document.getElementById("link").value;
+			console.log("generating qr code for  - ", link);
+			
+			var qrcode = new QRCode("qrcode", link);
+			document.getElementById("qr-target").innerHTML = "QR Code for : "+link;
+
+			console.log("done");
+		}
+
+		function clearDiv(divId){
+			var div = document.getElementById(divId);
+			while(div.firstChild){
+				div.removeChild(div.firstChild);
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<header>
+		<h3>To generate QR code for a website, enter the website URL in the below textbox and click "submit"</h3>
+	</header>
+
+		<label for="hyperlink">Website Link:</label>
+		<input type="text" id="link" name="link"><br><br>
+		<button onclick = "regenQrCode()" > Submit </button>
+
+	<main>
+		<div id = "qr-target"></div>
+		<div id="qrcode"></div>
+	</main>
+	
+
+</body>
+
+</html>
